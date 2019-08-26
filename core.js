@@ -1,5 +1,5 @@
 var bkg_page = chrome.extension.getBackgroundPage();
-var bbsurl = 'http://www.mcbbs.net';
+var bbsurl = 'https://www.mcbbs.net';
 
 var updateserver = 'https://api.zhaisoul.com/MCBBS-Helper/v1/update.json';
 //API地址
@@ -197,24 +197,6 @@ function GetMessage() {
 }
 
 function getNugget() {
-	console.log("开始自动签到");
-	$.get(bbsurl + '/home.php?mod=task&do=apply&id=10').fail(getNuggetFailed).done(function (data) {
-		$.get(bbsurl + '/home.php?mod=task&do=draw&id=10').fail(getNuggetFailed).done(function () {
-			var regex = /<div id="messagetext" class="alert_\w*">\s*<p>([^<]*)/;
-			var result = (regex.exec(data) || [])[1];
-
-			var avatarUrl = "icon.png";
-			if (mcbbs.userInfo)
-				avatarUrl = mcbbs.userInfo.avatar;
-
-			chrome.notifications.create({
-				type: "basic",
-				iconUrl: avatarUrl,
-				title: "每日金粒领取 - " + new Date().toLocaleDateString(),
-				message: result
-			});
-		});
-	});
 }
 
 function getNuggetFailed() {
