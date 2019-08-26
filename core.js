@@ -9,6 +9,9 @@ var forumindex = bbsurl + "/api/mobile/index.php?module=forumindex";
 //每次调用API都将缓存消息、提醒、用户名等信息（反正有啥用得到的信息就缓存）
 
 var mcbbs = new UserBBS(bbsurl, function () {
+	if(typeof($)==="undefined"){
+		return;
+	}
 	$('#bbs-new-pm').text(mcbbs.pm > 0 ? '消息(' + mcbbs.pm + ')' : '消息');
 	$('#bbs-new-notice').text(mcbbs.notice > 0 ? '提醒(' + mcbbs.notice + ')' : '提醒');
 	if (mcbbs.userInfo) {
@@ -242,51 +245,12 @@ var myHotThreadID = null;
 var ThreadURL = [];
 
 async function GetHotThread() {
-	console.log("开始获取热门贴");
-	var hotThread = await fetch(bbsurl + '/api/mobile/index.php?module=hotthread',{
-		method :'get',contentType:'MCBBSHelper Plugin/1.0(zhaisoul.650@gmail.com)'
-	})
-	//console.log(data.json());
-	var data = await hotThread.json();
-	/*
-	$.ajax({
-		url: bbsurl + "/api/mobile/index.php?module=hotthread",
-		contentType: 'MCBBSHelper Plugin/1.0(zhaisoul.650@gmail.com)'
-	}).done(function (data) {
-		*/
-	var json = data['Variables']["data"];
-	var randomThread = json[randomFrom(0, json.length)];
-	var forumname = await FidToName(randomThread["fid"]);
-	console.debug("应该接收"+forumname);
-	//FidToName(randomThread["fid"]).then(forumname => {
-
-	/*
-	if(myHotThreadID!=null){
-		console.log("手动清理通知");
-		chrome.notifications.clear(myHotThreadID);
-		myHotThreadID = null;
-	}
-	*/
-
-	chrome.notifications.create({
+		chrome.notifications.create({
 		type: "basic",
 		iconUrl: "icon.png",
-		title: "MCBBS扩展插件-大家在看什么",
-		buttons: [{ title: "点击查看" }],
-		message: "【" + forumname + "】 " + randomThread["subject"],
-		contextMessage:"最后回复时间："+randomThread["lastpost"].replace("&nbsp;"," "),
-	}, function (id) {
-		console.debug("该通知的id为"+id);
-		ThreadURL[id] = bbsurl+"/thread-"+randomThread["tid"]+"-1-1.html";
-		console.debug(ThreadURL);
-		setTimeout(function () {
-			console.log("自动清理通知");
-			chrome.notifications.clear(id);
-			//myHotThreadID = null;
-			delete ThreadURL[id];
-		}, 9000);
+		title: "此功能已报废",
+		message: "懒得修了"
 	});
-	//});
 }
 
 function randomFrom(lowerValue, upperValue) {

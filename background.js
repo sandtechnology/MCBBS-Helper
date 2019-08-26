@@ -1,10 +1,10 @@
 CheckUpdate();
 
-if((getOption("HotThreadPush")==="false"?false:true)==true){
+/*if((getOption("HotThreadPush")==="false"?false:true)==true){
     console.log("推送热门贴");
     GetHotThread();
     GetHotThread();
-}
+}*/
 chrome.tabs.onActivated.addListener(function (e) {
 	var time = Math.floor(Date.now() / 10000000);
     if (time != localStorage.Time) {
