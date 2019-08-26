@@ -134,7 +134,20 @@ function compareVersion(a, b) {
 }
 
 function OnClickCYQ() {
-	alert("啪，你死了，别说了。");
+	var i=0;
+	while(i!=17){
+	sendMsg("Attack!","啪");
+	i++;
+	}
+	sendMsg("Attack!","一秒17发，你死了，别说了。");
+}
+function sendMsg(title,msg){
+		chrome.notifications.create({
+		type: "basic",
+		iconUrl: "icon.png",
+		title: title,
+		message: msg
+	});
 }
 
 function OnMouseEnterExp() {

@@ -10,7 +10,7 @@ chrome.tabs.onActivated.addListener(function (e) {
     if (time != localStorage.Time) {
         chrome.tabs.get(e.tabId, getNugget);
         localStorage.Time = time;
-        if((getOption("HotThreadPush")==="false"?false:true)==true){ GetHotThread(); }
+        //if((getOption("HotThreadPush")==="false"?false:true)==true){ GetHotThread(); }
     }
 });
 chrome.alarms.onAlarm.addListener(function (a) {
